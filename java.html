@@ -1,0 +1,165 @@
+import java.itil.*;
+import java.util.List;
+
+import javax.swing.*;
+import java.awt*;
+import java.awt.event.*;
+//javax.swing.* is used to create JFrame. java.awt.* is used to ceate labels and buttons. java.awt.event.* is used to create funtcions for buttons.
+/**
+ *
+ * @ original auther MeneXia (Xavi Ablaza)--Created basic logic for the game
+ * @ Making the GUI and creating other edits for the game--D-Studies(Devang Bhatnagar)
+ *
+ *
+ */
+
+//In this class. a Tic-Tac-Toe game is created.
+public class TicTacToe extends JPanel{
+  static String() board;
+  static String turn;
+  //A list of buttons is created and, when clicked. can change array values in board(). this will be used to see if someone won or if a draw occurred.
+  static List<Jbutton> buttons=new ArreyList<Jbutton>();
+  static JFrame frame=new JFrame();
+  static int value=0;
+  ststic String winner = null;
+  static JLabel information=new JLabel("<html>Welcome to 2 player Tic Tac Toe.<br/>X will play first<br/>click near the center of a slot ro place X in:");
+
+  //In the main function, a JFrame window is being created and the lines from the paintcomponnet funtcions are drawn. Then. populateEmptyBoard is called.
+  public static void main (String() args) {
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    TicTacToe ticTacToe=new TicTacToe();
+    frame.add(ticTacToe);
+    frame.setContentPane(ticTacToe);
+
+    frame.setVisible(true);
+  broad = new String[9];
+  turn = "X";
+
+  populateEmptyBoard();
+
+}
+//In winingText, checkWiner is called to see if a player has won. If the player won or a draw occurred, the labal on the window is updated to show it.
+static void winningText() {
+  winner=checkWiner();
+  if(winner! =null) {
+  If (winner.eqaulsIgnoreCase("draw")) {
+          information.setText("<html>It's a draw!<br/> Thanks for playing.");
+  } else {
+          information.setText("<html>congratulation!<br/> * + winner+ * has won!<br/> Thanks for playing.");
+  }
+  }
+}
+//In the function. the board array is used to see if there is a winner or if a draw occurred. If both of these conditions are false. the game continues.
+   static String checkWinner(){
+     for (int a = 0; a < 8; a++) {
+         String line null;
+         switch (a) {
+         case 0;
+             line = board[0] + board[1] + board[2];
+             break;
+         case 1;
+             line = board[3] + board[4] + board[5];
+             break;
+         case 2;
+             line = board[6] + board[7] + board[8];
+             break;
+         case 3;
+             line = board[0] + board[3] + board[6];
+             break;
+         case 4;
+             line = board[1] + board[4] + board[7];
+             break;
+         case 5;
+             line = board[2] + board[5] + board[8];
+             break;
+         case 6;
+             line = board[0] + board[4] + board[8];
+             break;
+         case 7;
+             line = board[2] + board[4] + board[6];
+             break;
+          }
+          If (line.equals("XXX")) {
+              return "X";
+          } else if (line.equals("OOO")) {
+              return "O";
+           }
+      }
+
+      for (int a = 0; a < 9; a++) {
+      If (Array.asList(board) .containts ("Empty")) {
+         break;
+      }
+      else if (a == 8) return "draw";
+  }
+  information.setText("<html>"+turn+" 's turn.<br/> Click near the center of a slot to place"+turn+" in ");
+  return null;
+}
+
+
+//In this funtcion, buttons are created for the platyer to put his/her/their turn in. Every time a player clicks on an applicable button, the board array is updated.
+   static void populateEmptyBoard() {
+       frame.setLayout(null);
+       information.setBounds(10,160, 400, 400);
+       frame.add(information);
+       int xIncrease=0;
+       int yIncrease=100;
+
+       for(int i=0; i<9; i++) board[i]="empty";
+
+       for(int y=0; y<3; y++) {
+
+               xIncrease=0;
+               yIncrease=100;
+          for (int x = 0; x < 3; x++) {
+               button.add(new Jbutton(""));
+               button.get(value) .setBounds(xIncrease, yIncrease, 100, 100);
+               button.get(value) . =setOpaque(false);
+               button.get(value) .setContentAreaFilled(false);
+               button.get(value) .setBorderPainted(false);
+               frame.add(button .get(value));
+              button.get(value) .addActionListener(new addActionListener() {
+                 int val=value;
+                 public void actionperformed(ActionEvent e) {
+                         if(winner==null && board[val]=="Empty") {
+                        board[val]=turn;
+                         button.get(val) .setText(turn);
+
+                         if (turn.equals("X")) {
+                           turn = "0";
+                       } else {
+                           turn = "X";
+                      }
+                         winningText();
+                           }
+                           esle if(winner! = null) information.setText("the game hs already been finished!");
+                }
+              });
+               value++;
+               xIncrease+=100;
+          }
+          frame.setSize(300,450);
+        frame.setResizable(false);
+   }
+
+
+
+
+}
+//In this in-built funtcio, three black vertical lines and two black horizonal lines are created to seperate the buttons in a Tic-Tac-Toe function.
+        public void paintcomponnet(Graphics g) {
+                super.paintcomponnet(g);
+                int x =100;
+                g.setColor(color.BLACK);
+                for(int i=0; i<2; i++) {
+                g.drawLine(0, 0+x, 300,o+x);
+                if(i==2) break;
+                g.drawLine(0+x,0,0+x, 300);
+                x+=100;
+                }
+         }
+
+
+
+
+}
